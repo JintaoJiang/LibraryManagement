@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title> Bookshelf </title>
+</head>
+	<div align="center">
+		<h1> Bookshelf </h1>
+		<table border="1" cellpadding="10">
+			<tr>
+				<td>ID</td>
+				<td>Title</td>
+				<td>Author</td>
+				<td>Price</td>
+				<td>Status</td>
+				<td colspan="2" align="center"> <a href="/bookAPI/addBookPage" target="_blank"> Add Book </td>
+			</tr>
+			<#list books as book>
+				<tr>
+					<td>${book.id}</td>
+					<td>${book.title}</td>
+					<td>${book.author}</td>
+					<td>${book.price}</td>
+					<td><#if book.status == 0> Available <#elseif book.status == 1> Borrowed </#if></td>
+					<td> <a href="/bookAPI/books/${book.id}/borrowBook"> Borrow </td>
+					<td> <a href="/bookAPI/books/${book.id}/returnBook"> Return </td>
+				</tr>
+			</#list>
+		</table>
+	
+	</div>
+<body>
+	
+</body>
+</html>

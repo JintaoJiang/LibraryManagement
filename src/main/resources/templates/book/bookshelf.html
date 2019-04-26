@@ -3,7 +3,29 @@
 <head>
 	<meta charset="UTF-8">
 	<title> Bookshelf </title>
+	<style type="text/css">
+		a {text-decoration : none}
+		a:visited {color : blue}
+	</style>
 </head>
+<body>
+	<div align="right">
+		<#if host??>
+			<table cellpadding="10">
+				<tr>
+					<td>Hello, ${host.name}!</td>
+					<td><a href="/userAPI/logout">logout</td>
+				</tr>
+			</table>
+		<#else>
+			<table cellpadding="10">
+				<tr>
+					<td><a href="/userAPI/loginPage">login</td>
+					<td><a href="/userAPI/registerPage">register</td>
+				</tr>
+			</table>
+		</#if>
+	</div>
 	<div align="center">
 		<h1> Bookshelf </h1>
 		<table border="1" cellpadding="10">
@@ -22,14 +44,11 @@
 					<td>${book.author}</td>
 					<td>${book.price}</td>
 					<td><#if book.status == 0> Available <#elseif book.status == 1> Borrowed </#if></td>
-					<td> <a href="/bookAPI/books/${book.id}/borrowBook"> Borrow </td>
-					<td> <a href="/bookAPI/books/${book.id}/returnBook"> Return </td>
+					<td><#if book.status == 0> <a href="/bookAPI/books/${book.id}/borrowBook"> Borrow <#else> Borrow </#if></td>
+					<td><#if book.status == 1> <a href="/bookAPI/books/${book.id}/returnBook"> Return <#else> Return </#if></td>
 				</tr>
 			</#list>
-		</table>
-	
+		</table>	
 	</div>
-<body>
-	
 </body>
 </html>
